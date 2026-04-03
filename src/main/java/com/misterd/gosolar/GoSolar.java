@@ -1,6 +1,7 @@
 package com.misterd.gosolar;
 
 import com.misterd.gosolar.block.GSBlocks;
+import com.misterd.gosolar.blockentity.GSBlockEntities;
 import com.misterd.gosolar.item.GSCreativeTab;
 import com.misterd.gosolar.item.GSItems;
 import net.neoforged.api.distmarker.Dist;
@@ -27,6 +28,7 @@ public class GoSolar {
         GSItems.register(modEventBus);
         GSBlocks.register(modEventBus);
         GSCreativeTab.register(modEventBus);
+        GSBlockEntities.register(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

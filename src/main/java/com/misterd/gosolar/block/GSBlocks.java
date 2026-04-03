@@ -1,6 +1,7 @@
 package com.misterd.gosolar.block;
 
 import com.misterd.gosolar.GoSolar;
+import com.misterd.gosolar.block.custom.BasicSolarPanelBlock;
 import com.misterd.gosolar.item.GSItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
