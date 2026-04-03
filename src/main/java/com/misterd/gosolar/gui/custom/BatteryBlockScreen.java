@@ -1,5 +1,6 @@
 package com.misterd.gosolar.gui.custom;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -95,9 +96,9 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
         if (mouseX >= x + 7 && mouseX <= x + 169 && mouseY >= y + 14 && mouseY <= y + 50) {
             List<Component> tooltip = new ArrayList<>();
             double pct = maxEnergy > 0 ? (double) energyStored * 100.0D / (double) maxEnergy : 0.0D;
-            tooltip.add(Component.literal("Energy Stored").withStyle(net.minecraft.ChatFormatting.GOLD));
-            tooltip.add(Component.literal(fmt.format(energyStored) + " / " + fmt.format(maxEnergy) + " RF").withStyle(net.minecraft.ChatFormatting.WHITE));
-            tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(net.minecraft.ChatFormatting.GRAY));
+            tooltip.add(Component.literal("Energy Stored").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(fmt.format(energyStored) + " / " + fmt.format(maxEnergy) + " RF").withStyle(ChatFormatting.WHITE));
+            tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(ChatFormatting.GRAY));
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
     }

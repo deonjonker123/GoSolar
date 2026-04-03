@@ -5,7 +5,6 @@ import com.misterd.gosolar.item.GSItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -19,20 +18,12 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        // ============================================================
-        // SILICA BLEND - Shapeless
-        // ============================================================
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GSItems.SILICA_BLEND.get(), 3)
                 .requires(Items.SAND)
                 .requires(Items.QUARTZ)
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
                 .save(recipeOutput);
 
-        // ============================================================
-        // SOLAR CELLS
-        // ============================================================
-
-        // Basic Solar Cell
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSItems.BASIC_SOLAR_CELL.get())
                 .pattern("GGG")
                 .pattern("CBC")
@@ -44,7 +35,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_silica_blend", has(GSItems.SILICA_BLEND.get()))
                 .save(recipeOutput);
 
-        // Hardened Solar Cell
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSItems.HARDENED_SOLAR_CELL.get())
                 .pattern("GGG")
                 .pattern("CBC")
@@ -56,7 +46,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_basic_solar_cell", has(GSItems.BASIC_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Advanced Solar Cell
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSItems.ADVANCED_SOLAR_CELL.get())
                 .pattern("GGG")
                 .pattern("CBC")
@@ -68,7 +57,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_hardened_solar_cell", has(GSItems.HARDENED_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Elite Solar Cell
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSItems.ELITE_SOLAR_CELL.get())
                 .pattern("GGG")
                 .pattern("CBC")
@@ -80,7 +68,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_advanced_solar_cell", has(GSItems.ADVANCED_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Ultimate Solar Cell
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSItems.ULTIMATE_SOLAR_CELL.get())
                 .pattern("GGG")
                 .pattern("CBC")
@@ -92,11 +79,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_elite_solar_cell", has(GSItems.ELITE_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // ============================================================
-        // SOLAR PANELS
-        // ============================================================
-
-        // Basic Solar Panel
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.BASIC_SOLAR_PANEL.get())
                 .pattern("CCC")
                 .pattern("SPS")
@@ -107,7 +89,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_basic_solar_cell", has(GSItems.BASIC_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Hardened Solar Panel
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.HARDENED_SOLAR_PANEL.get())
                 .pattern("CCC")
                 .pattern("SPS")
@@ -118,7 +99,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_hardened_solar_cell", has(GSItems.HARDENED_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Advanced Solar Panel
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ADVANCED_SOLAR_PANEL.get())
                 .pattern("CCC")
                 .pattern("SGS")
@@ -129,7 +109,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_advanced_solar_cell", has(GSItems.ADVANCED_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Elite Solar Panel
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ELITE_SOLAR_PANEL.get())
                 .pattern("CCC")
                 .pattern("SDS")
@@ -140,7 +119,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_elite_solar_cell", has(GSItems.ELITE_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // Ultimate Solar Panel
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ULTIMATE_SOLAR_PANEL.get())
                 .pattern("CCC")
                 .pattern("SXS")
@@ -151,11 +129,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_ultimate_solar_cell", has(GSItems.ULTIMATE_SOLAR_CELL.get()))
                 .save(recipeOutput);
 
-        // ============================================================
-        // BATTERIES
-        // ============================================================
-
-        // Basic Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.BASIC_BATTERY.get())
                 .pattern("SIS")
                 .pattern("SCS")
@@ -167,7 +140,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_silica_blend", has(GSItems.SILICA_BLEND.get()))
                 .save(recipeOutput);
 
-        // Hardened Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.HARDENED_BATTERY.get())
                 .pattern("SCS")
                 .pattern("SBS")
@@ -179,7 +151,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_basic_battery", has(GSBlocks.BASIC_BATTERY.get()))
                 .save(recipeOutput);
 
-        // Advanced Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ADVANCED_BATTERY.get())
                 .pattern("SGS")
                 .pattern("SBS")
@@ -191,7 +162,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_hardened_battery", has(GSBlocks.HARDENED_BATTERY.get()))
                 .save(recipeOutput);
 
-        // Elite Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ELITE_BATTERY.get())
                 .pattern("SDS")
                 .pattern("SBS")
@@ -203,7 +173,6 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy("has_advanced_battery", has(GSBlocks.ADVANCED_BATTERY.get()))
                 .save(recipeOutput);
 
-        // Ultimate Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ULTIMATE_BATTERY.get())
                 .pattern("SNS")
                 .pattern("SBS")
