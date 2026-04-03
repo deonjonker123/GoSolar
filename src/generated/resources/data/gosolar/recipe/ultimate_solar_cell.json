@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "gosolar:elite_solar_cell"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "I": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CBC",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:ultimate_solar_cell"
+  }
+}

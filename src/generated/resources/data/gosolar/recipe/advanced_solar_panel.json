@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gosolar:advanced_solar_cell"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "SGS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:advanced_solar_panel"
+  }
+}

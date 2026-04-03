@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_silica_blend": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gosolar:silica_blend"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gosolar:basic_battery"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_silica_blend"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gosolar:basic_battery"
+    ]
+  }
+}

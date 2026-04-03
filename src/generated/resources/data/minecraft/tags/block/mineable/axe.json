@@ -1,0 +1,14 @@
+{
+  "values": [
+    "gosolar:basic_solar_panel",
+    "gosolar:hardened_solar_panel",
+    "gosolar:advanced_solar_panel",
+    "gosolar:elite_solar_panel",
+    "gosolar:ultimate_solar_panel",
+    "gosolar:basic_battery",
+    "gosolar:hardened_battery",
+    "gosolar:advanced_battery",
+    "gosolar:elite_battery",
+    "gosolar:ultimate_battery"
+  ]
+}

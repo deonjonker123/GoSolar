@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gosolar:basic_solar_cell"
+    },
+    "P": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "SPS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:basic_solar_panel"
+  }
+}

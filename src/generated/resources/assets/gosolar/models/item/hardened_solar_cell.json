@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gosolar:item/hardened_solar_cell"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "gosolar:basic_battery"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "SBS",
+    "SRS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:hardened_battery"
+  }
+}

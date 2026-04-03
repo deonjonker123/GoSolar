@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "gosolar:basic_solar_cell"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CBC",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:hardened_solar_cell"
+  }
+}

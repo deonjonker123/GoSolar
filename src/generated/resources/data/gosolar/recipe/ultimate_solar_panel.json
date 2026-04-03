@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gosolar:ultimate_solar_cell"
+    },
+    "S": {
+      "tag": "c:stones"
+    },
+    "X": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "SXS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:ultimate_solar_panel"
+  }
+}

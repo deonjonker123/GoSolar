@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "gosolar:silica_blend"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CBC",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:basic_solar_cell"
+  }
+}

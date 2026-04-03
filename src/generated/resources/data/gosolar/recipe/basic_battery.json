@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gosolar:silica_blend"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SIS",
+    "SCS",
+    "SRS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:basic_battery"
+  }
+}

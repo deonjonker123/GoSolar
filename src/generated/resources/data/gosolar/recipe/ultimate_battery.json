@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "gosolar:elite_battery"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SNS",
+    "SBS",
+    "SRS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:ultimate_battery"
+  }
+}
