@@ -1,7 +1,7 @@
 package com.misterd.gosolar.block;
 
 import com.misterd.gosolar.GoSolar;
-import com.misterd.gosolar.block.custom.BasicSolarPanelBlock;
+import com.misterd.gosolar.block.custom.*;
 import com.misterd.gosolar.item.GSItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -18,35 +18,35 @@ public class GSBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(GoSolar.MODID);
 
     public static final DeferredBlock<Block> BASIC_SOLAR_PANEL = registerBlock("basic_solar_panel",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new BasicSolarPanelBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> HARDENED_SOLAR_PANEL = registerBlock("hardened_solar_panel",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new HardenedSolarPanelBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> ADVANCED_SOLAR_PANEL = registerBlock("advanced_solar_panel",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new AdvancedSolarPanelBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> ELITE_SOLAR_PANEL = registerBlock("elite_solar_panel",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new EliteSolarPanelBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> ULTIMATE_SOLAR_PANEL = registerBlock("ultimate_solar_panel",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new UltimateSolarPanelBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.STONE)
                     .noOcclusion()

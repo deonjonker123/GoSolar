@@ -1,7 +1,12 @@
 {
 	"variants": {
-		"": {
-			"model": "gosolar:block/advanced_solar_panel"
-		}
+		"facing=north,powered=false": { "model": "gosolar:block/basic_solar_panel" },
+		"facing=south,powered=false": { "model": "gosolar:block/basic_solar_panel", "y": 180 },
+		"facing=east,powered=false":  { "model": "gosolar:block/basic_solar_panel", "y": 90 },
+		"facing=west,powered=false":  { "model": "gosolar:block/basic_solar_panel", "y": 270 },
+		"facing=north,powered=true":  { "model": "gosolar:block/advanced_solar_panel_on" },
+		"facing=south,powered=true":  { "model": "gosolar:block/advanced_solar_panel_on", "y": 180 },
+		"facing=east,powered=true":   { "model": "gosolar:block/advanced_solar_panel_on", "y": 90 },
+		"facing=west,powered=true":   { "model": "gosolar:block/advanced_solar_panel_on", "y": 270 }
 	}
 }
