@@ -1,5 +1,8 @@
 package com.misterd.gosolar;
 
+import com.misterd.gosolar.block.GSBlocks;
+import com.misterd.gosolar.item.GSCreativeTab;
+import com.misterd.gosolar.item.GSItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,6 +23,10 @@ public class GoSolar {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
+
+        GSItems.register(modEventBus);
+        GSBlocks.register(modEventBus);
+        GSCreativeTab.register(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

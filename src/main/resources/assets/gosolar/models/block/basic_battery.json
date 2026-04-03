@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"north": "gosolar:block/battery_sides",
+		"south": "gosolar:block/battery_sides",
+		"east": "gosolar:block/battery_sides",
+		"west": "gosolar:block/battery_sides",
+		"up": "gosolar:block/battery_ends",
+		"down": "gosolar:block/battery_ends",
+		"particle": "gosolar:block/battery_sides"
+	}
+}

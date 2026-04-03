@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"": {
+			"model": "gosolar:block/hardened_solar_panel"
+		}
+	}
+}

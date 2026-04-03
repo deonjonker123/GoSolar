@@ -1,3 +1,21 @@
 {
-  
+  "creativetab.gosolar": "Go Solar",
+
+  "block.gosolar.basic_solar_panel": "Basic Solar Panel",
+  "block.gosolar.hardened_solar_panel": "Hardened Solar Panel",
+  "block.gosolar.advanced_solar_panel": "Advanced Solar Panel",
+  "block.gosolar.elite_solar_panel": "Elite Solar Panel",
+  "block.gosolar.ultimate_solar_panel": "Ultimate Solar Panel",
+  "block.gosolar.basic_battery": "Basic Battery",
+  "block.gosolar.hardened_battery": "Hardened Battery",
+  "block.gosolar.advanced_battery": "Advanced Battery",
+  "block.gosolar.elite_battery": "Elite Battery",
+  "block.gosolar.ultimate_battery": "Ultimate Battery",
+
+  "item.gosolar.basic_solar_cell": "Basic Solar Cell",
+  "item.gosolar.hardened_solar_cell": "Hardened Solar Cell",
+  "item.gosolar.advanced_solar_cell": "Advanced Solar Cell",
+  "item.gosolar.elite_solar_cell": "Elite Solar Cell",
+  "item.gosolar.ultimate_solar_cell": "Ultimate Solar Cell",
+  "item.gosolar.silica_blend": "Silica Blend"
 }

@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"": {
+			"model": "gosolar:block/basic_solar_panel"
+		}
+	}
+}
