@@ -1,7 +1,6 @@
 {
 	"variants": {
-		"": {
-			"model": "gosolar:block/advanced_battery"
-		}
+		"powered=false": { "model": "gosolar:block/advanced_battery" },
+		"powered=true":  { "model": "gosolar:block/advanced_battery_on" }
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"variants": {
-		"": {
-			"model": "gosolar:block/hardened_battery"
-		}
+		"powered=false": { "model": "gosolar:block/hardened_battery" },
+		"powered=true":  { "model": "gosolar:block/hardened_battery_on" }
 	}
 }

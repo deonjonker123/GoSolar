@@ -13,10 +13,17 @@ public class GSCapabilities {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+
         event.registerBlockEntity(
                 Capabilities.EnergyStorage.BLOCK,
                 GSBlockEntities.SOLAR_PANEL_BE.get(),
                 (be, side) -> side == Direction.DOWN ? be.getEnergyStorage() : null
+        );
+
+        event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                GSBlockEntities.BATTERY_BE.get(),
+                (be, side) -> be.getEnergyStorage()
         );
     }
 }

@@ -17,5 +17,11 @@
   "item.gosolar.advanced_solar_cell": "Advanced Solar Cell",
   "item.gosolar.elite_solar_cell": "Elite Solar Cell",
   "item.gosolar.ultimate_solar_cell": "Ultimate Solar Cell",
-  "item.gosolar.silica_blend": "Silica Blend"
+  "item.gosolar.silica_blend": "Silica Blend",
+
+  "block.gosolar.basic_solar_panel.subtitle": "Generates 128RF/t",
+  "block.gosolar.hardened_solar_panel.subtitle": "Generates 512RF/t",
+  "block.gosolar.advanced_solar_panel.subtitle": "Generates 2 048RF/t",
+  "block.gosolar.elite_solar_panel.subtitle": "Generates 8 192RF/t",
+  "block.gosolar.ultimate_solar_panel.subtitle": "Generates 32 768RF/t"
 }
