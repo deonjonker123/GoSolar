@@ -18,7 +18,7 @@ public class GSBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BlockTags.MINEABLE_WITH_AXE)
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(GSBlocks.BASIC_SOLAR_PANEL.get())
                 .add(GSBlocks.HARDENED_SOLAR_PANEL.get())
                 .add(GSBlocks.ADVANCED_SOLAR_PANEL.get())
