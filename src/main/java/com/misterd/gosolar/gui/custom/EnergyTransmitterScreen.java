@@ -1,6 +1,7 @@
 package com.misterd.gosolar.gui.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -92,9 +93,9 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         if (mouseX >= x + 6 && mouseX <= x + 145 && mouseY >= y + 24 && mouseY <= y + 61) {
             List<Component> tooltip = new ArrayList<>();
             double pct = maxPool > 0 ? (double) poolStored * 100.0D / (double) maxPool : 0.0D;
-            tooltip.add(Component.translatable("gui.gosolar.transmitter_pool_title").withStyle(net.minecraft.ChatFormatting.GOLD));
-            tooltip.add(Component.literal(fmt.format(poolStored) + " / " + fmt.format(maxPool) + " RF").withStyle(net.minecraft.ChatFormatting.WHITE));
-            tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(net.minecraft.ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("gui.gosolar.transmitter_pool_title").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(fmt.format(poolStored) + " / " + fmt.format(maxPool) + " RF").withStyle(ChatFormatting.WHITE));
+            tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(ChatFormatting.GRAY));
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
     }
