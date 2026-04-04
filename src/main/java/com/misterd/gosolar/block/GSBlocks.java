@@ -91,7 +91,13 @@ public class GSBlocks {
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .noLootTable()));
+                    .noLootTable())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.basic_battery.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
 
     public static final DeferredBlock<Block> HARDENED_BATTERY = registerBlock("hardened_battery",
             () -> new HardenedBatteryBlock(BlockBehaviour.Properties.of()
@@ -99,7 +105,13 @@ public class GSBlocks {
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .noLootTable()));
+                    .noLootTable())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.hardened_battery.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
 
     public static final DeferredBlock<Block> ADVANCED_BATTERY = registerBlock("advanced_battery",
             () -> new AdvancedBatteryBlock(BlockBehaviour.Properties.of()
@@ -107,7 +119,13 @@ public class GSBlocks {
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .noLootTable()));
+                    .noLootTable())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.advanced_battery.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
 
     public static final DeferredBlock<Block> ELITE_BATTERY = registerBlock("elite_battery",
             () -> new EliteBatteryBlock(BlockBehaviour.Properties.of()
@@ -115,7 +133,13 @@ public class GSBlocks {
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .noLootTable()));
+                    .noLootTable())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.elite_battery.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
 
     public static final DeferredBlock<Block> ULTIMATE_BATTERY = registerBlock("ultimate_battery",
             () -> new UltimateBatteryBlock(BlockBehaviour.Properties.of()
@@ -123,7 +147,87 @@ public class GSBlocks {
                     .sound(SoundType.STONE)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .noLootTable()));
+                    .noLootTable())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.ultimate_battery.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
+
+    public static final DeferredBlock<Block> BASIC_ENERGY_RECEIVER = registerBlock("basic_energy_receiver",
+            () -> new BasicEnergyReceiverBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.basic_energy_receiver.subtitle").withStyle(ChatFormatting.GOLD));
+                }
+            });
+
+    public static final DeferredBlock<Block> HARDENED_ENERGY_RECEIVER = registerBlock("hardened_energy_receiver",
+            () -> new HardenedEnergyReceiverBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops())
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.hardened_energy_receiver.subtitle").withStyle(ChatFormatting.GOLD));
+                }
+            });
+
+    public static final DeferredBlock<Block> ADVANCED_ENERGY_RECEIVER = registerBlock("advanced_energy_receiver",
+            () -> new AdvancedEnergyReceiverBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()){
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.advanced_energy_receiver.subtitle").withStyle(ChatFormatting.GOLD));
+                }
+            });
+
+    public static final DeferredBlock<Block> ELITE_ENERGY_RECEIVER = registerBlock("elite_energy_receiver",
+            () -> new EliteEnergyReceiverBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()){
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.elite_energy_reveiver.subtitle").withStyle(ChatFormatting.GOLD));
+                }
+            });
+
+    public static final DeferredBlock<Block> ULTIMATE_ENERGY_RECEIVER = registerBlock("ultimate_energy_receiver",
+            () -> new UltimateEnergyReceiverBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()){
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.ultimate_energy_receiver.subtitle").withStyle(ChatFormatting.GOLD));
+                }
+            });
+
+    public static final DeferredBlock<Block> ENERGY_TRANSMITTER = registerBlock("energy_transmitter",
+            () -> new EnergyTransmitterBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F, 3.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()){
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("block.gosolar.energy_transmitter.subtitle").withStyle(ChatFormatting.DARK_AQUA));
+                }
+            });
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

@@ -15,7 +15,7 @@ public class GSCreativeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, GoSolar.MODID);
 
     public static final Supplier<CreativeModeTab> GOSOLAR = CREATIVE_MODE_TAB.register("gosolar_creativetab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(GSBlocks.ELITE_BATTERY.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(GSItems.ELITE_SOLAR_CELL.get()))
                     .title(Component.translatable("creativetab.gosolar"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(GSItems.SILICA_BLEND);
@@ -36,6 +36,14 @@ public class GSCreativeTab {
                         output.accept(GSBlocks.ADVANCED_BATTERY);
                         output.accept(GSBlocks.ELITE_BATTERY);
                         output.accept(GSBlocks.ULTIMATE_BATTERY);
+
+                        output.accept(GSBlocks.ENERGY_TRANSMITTER);
+
+                        output.accept(GSBlocks.BASIC_ENERGY_RECEIVER);
+                        output.accept(GSBlocks.HARDENED_ENERGY_RECEIVER);
+                        output.accept(GSBlocks.ADVANCED_ENERGY_RECEIVER);
+                        output.accept(GSBlocks.ELITE_ENERGY_RECEIVER);
+                        output.accept(GSBlocks.ULTIMATE_ENERGY_RECEIVER);
                     }).build());
 
     public static void register(IEventBus eventBus) {

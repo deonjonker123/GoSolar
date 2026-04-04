@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gosolar:ultimate_energy_receiver"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_ultimate_solar_cell": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gosolar:ultimate_solar_cell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ultimate_solar_cell"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gosolar:ultimate_energy_receiver"
+    ]
+  }
+}

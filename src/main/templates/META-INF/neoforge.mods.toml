@@ -90,7 +90,7 @@ A lightweight and simple RF generation and storage mod
 
 [[dependencies.${mod_id}]]
 modId="jade"
-type="required"
+type="optional"
 versionRange="[11,)"
 ordering="NONE"
 side="BOTH"

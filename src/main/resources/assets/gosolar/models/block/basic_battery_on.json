@@ -1,12 +1,36 @@
 {
-	"parent": "minecraft:block/cube",
+	"render_type": "cutout",
 	"textures": {
-		"north": "gosolar:block/basic_battery_sides_on",
-		"south": "gosolar:block/basic_battery_sides_on",
-		"east": "gosolar:block/basic_battery_sides_on",
-		"west": "gosolar:block/basic_battery_sides_on",
-		"up": "gosolar:block/battery_ends",
-		"down": "gosolar:block/battery_ends",
+		"sides":   "gosolar:block/battery_sides",
+		"lights":  "gosolar:block/basic_battery_sides_on",
+		"ends":    "gosolar:block/battery_ends",
 		"particle": "gosolar:block/basic_battery_sides_on"
-	}
+	},
+	"elements": [
+		{
+			"name": "CUBE",
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#sides"},
+				"east":  {"uv": [0, 0, 16, 16], "texture": "#sides"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#sides"},
+				"west":  {"uv": [0, 0, 16, 16], "texture": "#sides"},
+				"up":    {"uv": [0, 0, 16, 16], "texture": "#ends"},
+				"down":  {"uv": [0, 0, 16, 16], "texture": "#ends"}
+			}
+		},
+		{
+			"name": "CUBE_LIGHTS",
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#lights", "neoforge_data": {"block_light": 15, "sky_light": 15}},
+				"east":  {"uv": [0, 0, 16, 16], "texture": "#lights", "neoforge_data": {"block_light": 15, "sky_light": 15}},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#lights", "neoforge_data": {"block_light": 15, "sky_light": 15}},
+				"west":  {"uv": [0, 0, 16, 16], "texture": "#lights", "neoforge_data": {"block_light": 15, "sky_light": 15}}
+			}
+		}
+	]
 }

@@ -29,6 +29,14 @@ public class GSBlockTagProvider extends BlockTagsProvider {
                 .add(GSBlocks.HARDENED_BATTERY.get())
                 .add(GSBlocks.ADVANCED_BATTERY.get())
                 .add(GSBlocks.ELITE_BATTERY.get())
-                .add(GSBlocks.ULTIMATE_BATTERY.get());
+                .add(GSBlocks.ULTIMATE_BATTERY.get())
+
+                .add(GSBlocks.BASIC_ENERGY_RECEIVER.get())
+                .add(GSBlocks.HARDENED_ENERGY_RECEIVER.get())
+                .add(GSBlocks.ADVANCED_ENERGY_RECEIVER.get())
+                .add(GSBlocks.ELITE_ENERGY_RECEIVER.get())
+                .add(GSBlocks.ULTIMATE_ENERGY_RECEIVER.get())
+
+                .add(GSBlocks.ENERGY_TRANSMITTER.get());
     }
 }

@@ -6,11 +6,20 @@
   "block.gosolar.advanced_solar_panel": "Advanced Solar Panel",
   "block.gosolar.elite_solar_panel": "Elite Solar Panel",
   "block.gosolar.ultimate_solar_panel": "Ultimate Solar Panel",
+
   "block.gosolar.basic_battery": "Basic Battery",
   "block.gosolar.hardened_battery": "Hardened Battery",
   "block.gosolar.advanced_battery": "Advanced Battery",
   "block.gosolar.elite_battery": "Elite Battery",
   "block.gosolar.ultimate_battery": "Ultimate Battery",
+
+  "block.gosolar.basic_energy_receiver": "Basic Energy Receiver",
+  "block.gosolar.hardened_energy_receiver": "Hardened Energy Receiver",
+  "block.gosolar.advanced_energy_receiver": "Advanced Energy Receiver",
+  "block.gosolar.elite_energy_receiver": "Elite Energy Receiver",
+  "block.gosolar.ultimate_energy_receiver": "Ultimate Energy Receiver",
+
+  "block.gosolar.energy_transmitter": "Energy Transmitter",
 
   "item.gosolar.basic_solar_cell": "Basic Solar Cell",
   "item.gosolar.hardened_solar_cell": "Hardened Solar Cell",
@@ -21,7 +30,24 @@
 
   "block.gosolar.basic_solar_panel.subtitle": "Generates 128RF/t",
   "block.gosolar.hardened_solar_panel.subtitle": "Generates 512RF/t",
-  "block.gosolar.advanced_solar_panel.subtitle": "Generates 2 048RF/t",
-  "block.gosolar.elite_solar_panel.subtitle": "Generates 8 192RF/t",
-  "block.gosolar.ultimate_solar_panel.subtitle": "Generates 32 768RF/t"
+  "block.gosolar.advanced_solar_panel.subtitle": "Generates 2,048RF/t",
+  "block.gosolar.elite_solar_panel.subtitle": "Generates 8,192RF/t",
+  "block.gosolar.ultimate_solar_panel.subtitle": "Generates 32,768RF/t",
+
+  "block.gosolar.basic_battery.subtitle": "Transfers 1,024 RF/t",
+  "block.gosolar.hardened_battery.subtitle": "Transfers 4,096 RF/t",
+  "block.gosolar.advanced_battery.subtitle": "Transfers 16,384 RF/t",
+  "block.gosolar.elite_battery.subtitle": "Transfers 65,536 RF/t",
+  "block.gosolar.ultimate_battery.subtitle": "Transfers 262,144 RF/t",
+
+  "block.gosolar.basic_energy_receiver.subtitle": "Receives and outputs 1,024 RF/t",
+  "block.gosolar.hardened_energy_receiver.subtitle": "Receives and outputs 4,096 RF/t",
+  "block.gosolar.advanced_energy_receiver.subtitle": "Receives and outputs 16,384 RF/t",
+  "block.gosolar.elite_energy_receiver.subtitle": "Receives and outputs 65,536 RF/t",
+  "block.gosolar.ultimate_energy_receiver.subtitle": "Receives and outputs 262,144 RF/t",
+
+  "block.gosolar.energy_transmitter.subtitle": "Network pool capacity: 2,147,483,647 RF",
+
+  "gui.gosolar.battery_title": "Stored Energy",
+  "gui.gosolar.transmitter_pool_title": "Global Network Pool"
 }

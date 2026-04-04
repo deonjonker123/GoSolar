@@ -1,6 +1,7 @@
 package com.misterd.gosolar.gui;
 
 import com.misterd.gosolar.gui.custom.BatteryBlockMenu;
+import com.misterd.gosolar.gui.custom.EnergyTransmitterMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -14,6 +15,7 @@ public class GSMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, "gosolar");
 
     public static final DeferredHolder<MenuType<?>, MenuType<BatteryBlockMenu>> BATTERY_MENU = registerMenuType("battery_menu", BatteryBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<EnergyTransmitterMenu>> ENERGY_TRANSMITTER_MENU = registerMenuType("energy_transmitter_menu", EnergyTransmitterMenu::new);
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));

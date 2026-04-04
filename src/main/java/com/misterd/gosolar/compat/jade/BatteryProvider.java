@@ -30,8 +30,10 @@ public enum BatteryProvider implements IBlockComponentProvider, IServerDataProvi
         NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
         double pct = capacity > 0 ? (double) energyStored * 100.0D / (double) capacity : 0.0D;
 
+        tooltip.add(Component.literal(fmt.format(energyStored) + " / " + fmt.format(capacity) + " RF")
+                .withStyle(ChatFormatting.YELLOW));
         tooltip.add(Component.literal(String.format("%.1f%%", pct))
-                .withStyle(ChatFormatting.GRAY));
+                .withStyle(ChatFormatting.GREEN));
         tooltip.add(Component.literal(fmt.format(transferRate) + " RF/t transfer rate")
                 .withStyle(ChatFormatting.AQUA));
     }
@@ -40,6 +42,7 @@ public enum BatteryProvider implements IBlockComponentProvider, IServerDataProvi
     public void appendServerData(CompoundTag data, BlockAccessor accessor) {
         BlockEntity be = accessor.getBlockEntity();
         if (be instanceof BatteryBlockEntity battery) {
+            data.putLong("energyStored", battery.getEnergyStoredLong());
             data.putLong("capacity", battery.getCapacity());
             data.putLong("transferRate", battery.getTransferRate());
         }

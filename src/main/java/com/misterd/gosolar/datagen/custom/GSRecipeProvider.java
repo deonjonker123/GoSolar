@@ -183,5 +183,65 @@ public class GSRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .define('R', Items.REDSTONE_BLOCK)
                 .unlockedBy("has_elite_battery", has(GSBlocks.ELITE_BATTERY.get()))
                 .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ENERGY_TRANSMITTER.get())
+                .pattern("DED")
+                .pattern("DBD")
+                .pattern("DED")
+                .define('D', Items.DIAMOND)
+                .define('E', Items.ENDER_PEARL)
+                .define('B', GSBlocks.ELITE_BATTERY.get())
+                .unlockedBy("has_elite_battery", has(GSBlocks.ELITE_BATTERY.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.BASIC_ENERGY_RECEIVER.get(), 4)
+                .pattern("SCS")
+                .pattern("CEC")
+                .pattern("SCS")
+                .define('S', Tags.Items.STONES)
+                .define('C', GSItems.BASIC_SOLAR_CELL.get())
+                .define('E', Items.ENDER_PEARL)
+                .unlockedBy("has_basic_solar_cell", has(GSItems.BASIC_SOLAR_CELL.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.HARDENED_ENERGY_RECEIVER.get(), 4)
+                .pattern("SCS")
+                .pattern("CEC")
+                .pattern("SCS")
+                .define('S', Tags.Items.STONES)
+                .define('C', GSItems.HARDENED_SOLAR_CELL.get())
+                .define('E', Items.ENDER_PEARL)
+                .unlockedBy("has_hardened_solar_cell", has(GSItems.HARDENED_SOLAR_CELL.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ADVANCED_ENERGY_RECEIVER.get(), 4)
+                .pattern("SCS")
+                .pattern("CEC")
+                .pattern("SCS")
+                .define('S', Tags.Items.STONES)
+                .define('C', GSItems.ADVANCED_SOLAR_CELL.get())
+                .define('E', Items.ENDER_PEARL)
+                .unlockedBy("has_advanced_solar_cell", has(GSItems.ADVANCED_SOLAR_CELL.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ELITE_ENERGY_RECEIVER.get(), 4)
+                .pattern("SCS")
+                .pattern("CEC")
+                .pattern("SCS")
+                .define('S', Tags.Items.STONES)
+                .define('C', GSItems.ELITE_SOLAR_CELL.get())
+                .define('E', Items.ENDER_PEARL)
+                .unlockedBy("has_elite_solar_cell", has(GSItems.ELITE_SOLAR_CELL.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GSBlocks.ULTIMATE_ENERGY_RECEIVER.get(), 4)
+                .pattern("SCS")
+                .pattern("CEC")
+                .pattern("SCS")
+                .define('S', Tags.Items.STONES)
+                .define('C', GSItems.ULTIMATE_SOLAR_CELL.get())
+                .define('E', Items.ENDER_PEARL)
+                .unlockedBy("has_ultimate_solar_cell", has(GSItems.ULTIMATE_SOLAR_CELL.get()))
+                .save(recipeOutput);
     }
 }

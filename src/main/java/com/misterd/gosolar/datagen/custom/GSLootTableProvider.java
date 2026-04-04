@@ -21,6 +21,14 @@ public class GSLootTableProvider extends BlockLootSubProvider {
         dropSelf(GSBlocks.ADVANCED_SOLAR_PANEL.get());
         dropSelf(GSBlocks.ELITE_SOLAR_PANEL.get());
         dropSelf(GSBlocks.ULTIMATE_SOLAR_PANEL.get());
+
+        dropSelf(GSBlocks.BASIC_ENERGY_RECEIVER.get());
+        dropSelf(GSBlocks.HARDENED_ENERGY_RECEIVER.get());
+        dropSelf(GSBlocks.ADVANCED_ENERGY_RECEIVER.get());
+        dropSelf(GSBlocks.ELITE_ENERGY_RECEIVER.get());
+        dropSelf(GSBlocks.ULTIMATE_ENERGY_RECEIVER.get());
+
+        dropSelf(GSBlocks.ENERGY_TRANSMITTER.get());
     }
 
     @Override

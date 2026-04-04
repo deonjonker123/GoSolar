@@ -25,5 +25,11 @@ public class GSCapabilities {
                 GSBlockEntities.BATTERY_BE.get(),
                 (be, side) -> be.getEnergyStorage()
         );
+
+        event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                GSBlockEntities.ENERGY_TRANSMITTER_BE.get(),
+                (be, side) -> be.getEnergyStorage()
+        );
     }
 }

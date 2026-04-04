@@ -5,6 +5,7 @@ import com.misterd.gosolar.blockentity.GSBlockEntities;
 import com.misterd.gosolar.component.GSDataComponents;
 import com.misterd.gosolar.gui.GSMenuTypes;
 import com.misterd.gosolar.gui.custom.BatteryBlockScreen;
+import com.misterd.gosolar.gui.custom.EnergyTransmitterScreen;
 import com.misterd.gosolar.item.GSCreativeTab;
 import com.misterd.gosolar.item.GSItems;
 import net.neoforged.api.distmarker.Dist;
@@ -55,6 +56,7 @@ public class GoSolar {
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(GSMenuTypes.BATTERY_MENU.get(), BatteryBlockScreen::new);
+            event.register(GSMenuTypes.ENERGY_TRANSMITTER_MENU.get(), EnergyTransmitterScreen::new);
         }
     }
 }

@@ -9,6 +9,12 @@
     "gosolar:hardened_battery",
     "gosolar:advanced_battery",
     "gosolar:elite_battery",
-    "gosolar:ultimate_battery"
+    "gosolar:ultimate_battery",
+    "gosolar:basic_energy_receiver",
+    "gosolar:hardened_energy_receiver",
+    "gosolar:advanced_energy_receiver",
+    "gosolar:elite_energy_receiver",
+    "gosolar:ultimate_energy_receiver",
+    "gosolar:energy_transmitter"
   ]
 }

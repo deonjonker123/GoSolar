@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "gosolar:elite_battery"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "DED",
+    "DBD",
+    "DED"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gosolar:energy_transmitter"
+  }
+}

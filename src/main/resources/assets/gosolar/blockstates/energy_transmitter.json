@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"powered=false": { "model": "gosolar:block/energy_transmitter" },
+		"powered=true":  { "model": "gosolar:block/energy_transmitter_on" }
+	}
+}

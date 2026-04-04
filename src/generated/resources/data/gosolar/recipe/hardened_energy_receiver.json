@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gosolar:hardened_solar_cell"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "CEC",
+    "SCS"
+  ],
+  "result": {
+    "count": 4,
+    "id": "gosolar:hardened_energy_receiver"
+  }
+}
