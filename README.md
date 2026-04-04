@@ -11,8 +11,8 @@ No multiblocks. No complex machines. No inverters. Just panels, batteries, and w
 - Five tiers of solar panels, from basic early-game generation to serious endgame power
 - Five tiers of batteries with built-in item charging and draining slots
 - Wireless energy transmission via the Energy Transmitter and five tiers of Energy Receivers
+- Private/public wireless network toggle — keep your power to yourself or share it with others
 - Jade support for all blocks
-- Compatible with any RF-based energy system (Ender IO, Pipez, and others)
 
 ---
 
@@ -44,11 +44,13 @@ Batteries store RF and can charge or drain powered items placed in their slots. 
 
 ### Energy Transmitter
 
-The Energy Transmitter accepts RF from any side and feeds it into the global wireless network pool. The pool is shared across all dimensions and persists across server restarts. Maximum pool capacity is 2,147,483,647 RF. The transmitter also supports item charging and draining via its GUI.
+The Energy Transmitter accepts RF from any side and feeds it into the wireless network pool. The pool is shared across all dimensions and persists across server restarts. Maximum pool capacity is 2,147,483,647 RF. The transmitter also supports item charging and draining via its GUI.
+
+By default the transmitter is **private** — only receivers placed by the same player can draw from its pool. It can be toggled to **public** via the GUI, allowing any player's receivers to draw from it.
 
 ### Energy Receivers
 
-Energy Receivers pull RF from the global wireless network pool and push it into any adjacent energy-accepting block. No pairing, no channels — if there's power in the pool, receivers distribute it.
+Energy Receivers pull RF from the wireless network pool and push it into any adjacent energy-accepting block. No pairing, no channels — if there's power in an accessible pool, receivers distribute it. Receivers always have access to their owner's private pool, plus any public pools from other players.
 
 | Receiver | Transfer Rate |
 |---|---|
@@ -62,7 +64,7 @@ Energy Receivers pull RF from the global wireless network pool and push it into 
 
 ## Compatibility
 
-GoSolar works with any mod that uses the standard RF/FE energy API. Tested and working with Ender IO conduits and Pipez pipes. Designed for singleplayer and private modpacks — no access control on the wireless network by design.
+GoSolar works with any mod that uses the standard RF/FE energy API. Tested and working with Ender IO conduits and Pipez pipes. Designed for singleplayer and private modpacks — while the privacy toggle makes it safer for servers, no formal access control system exists beyond the public/private flag.
 
 ---
 
@@ -71,5 +73,5 @@ GoSolar works with any mod that uses the standard RF/FE energy API. Tested and w
 - Solar panels only generate power with a clear line of sight to the sky
 - Thunderstorms stop solar generation entirely
 - Battery RF is stored in the item's data component and survives breaking and replacing
-- The wireless network pool is global and cross-dimensional — one transmitter serves all receivers everywhere
+- The wireless network pool is global and cross-dimensional
 - This mod is intentionally lightweight and does not aim to coexist with heavy energy mods like Mekanism

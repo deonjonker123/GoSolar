@@ -24,12 +24,19 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final String TAG_INVENTORY = "Inventory";
+    private static final String TAG_OWNER = "Owner";
+    private static final String TAG_PUBLIC = "IsPublic";
     private static final int SLOT_DRAIN = 0;
     private static final int SLOT_CHARGE = 1;
+
+    @Nullable
+    private UUID ownerUUID = null;
+    private boolean isPublic = false;
 
     private final SimpleContainer inventory = new SimpleContainer(2) {
         @Override
@@ -42,13 +49,14 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
     private final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int index) {
-            if (level instanceof ServerLevel serverLevel) {
-                long pool = GSWirelessNetwork.get(serverLevel).getPool();
+            if (level instanceof ServerLevel serverLevel && ownerUUID != null) {
+                long pool = GSWirelessNetwork.get(serverLevel).getPool(ownerUUID);
                 return switch (index) {
                     case 0 -> (int) (pool >> 32);
                     case 1 -> (int) (pool & 0xFFFFFFFFL);
                     case 2 -> (int) (GSWirelessNetwork.MAX_POOL >> 32);
                     case 3 -> (int) (GSWirelessNetwork.MAX_POOL & 0xFFFFFFFFL);
+                    case 4 -> isPublic ? 1 : 0;
                     default -> 0;
                 };
             }
@@ -56,44 +64,50 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
         }
 
         @Override
-        public void set(int index, int value) {}
+        public void set(int index, int value) {
+            if (index == 4) {
+                isPublic = value == 1;
+                setChanged();
+                updatePublicState();
+            }
+        }
 
         @Override
-        public int getCount() { return 4; }
+        public int getCount() { return 5; }
     };
 
     private final IEnergyStorage energyStorage = new IEnergyStorage() {
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
-            if (!(level instanceof ServerLevel serverLevel)) return 0;
+            if (!(level instanceof ServerLevel serverLevel) || ownerUUID == null) return 0;
             GSWirelessNetwork network = GSWirelessNetwork.get(serverLevel);
-            long canReceive = Math.min(maxReceive, GSWirelessNetwork.MAX_POOL - network.getPool());
+            long canReceive = Math.min(maxReceive, GSWirelessNetwork.MAX_POOL - network.getPool(ownerUUID));
             if (canReceive <= 0) return 0;
             if (!simulate) {
-                network.addToPool(canReceive);
+                network.addToPool(ownerUUID, canReceive);
                 setChanged();
-                updatePoweredState(true);
+                updatePoweredState();
             }
             return (int) canReceive;
         }
 
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
-            if (!(level instanceof ServerLevel serverLevel)) return 0;
+            if (!(level instanceof ServerLevel serverLevel) || ownerUUID == null) return 0;
             GSWirelessNetwork network = GSWirelessNetwork.get(serverLevel);
-            long canExtract = Math.min(maxExtract, network.getPool());
+            long canExtract = Math.min(maxExtract, network.getPool(ownerUUID));
             if (canExtract <= 0) return 0;
             if (!simulate) {
-                network.removeFromPool(canExtract);
+                network.removeFromPool(ownerUUID, canExtract);
                 setChanged();
-                updatePoweredState(network.getPool() > 0);
+                updatePoweredState();
             }
             return (int) canExtract;
         }
 
         @Override public int getEnergyStored() {
-            if (level instanceof ServerLevel serverLevel)
-                return (int) Math.min(GSWirelessNetwork.get(serverLevel).getPool(), Integer.MAX_VALUE);
+            if (level instanceof ServerLevel serverLevel && ownerUUID != null)
+                return (int) Math.min(GSWirelessNetwork.get(serverLevel).getPool(ownerUUID), Integer.MAX_VALUE);
             return 0;
         }
         @Override public int getMaxEnergyStored() { return Integer.MAX_VALUE; }
@@ -108,20 +122,33 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
     public IEnergyStorage getEnergyStorage() { return energyStorage; }
     public SimpleContainer getInventory() { return inventory; }
     public ContainerData getContainerData() { return containerData; }
+    @Nullable public UUID getOwnerUUID() { return ownerUUID; }
+    public boolean isPublic() { return isPublic; }
+    public void setOwner(UUID uuid) { this.ownerUUID = uuid; setChanged(); }
+    public void setPublic(boolean pub) { this.isPublic = pub; setChanged(); updatePublicState(); }
 
-    private void updatePoweredState(boolean powered) {
-        if (level == null) return;
+    private void updatePoweredState() {
+        if (level == null || ownerUUID == null) return;
+        long pool = (level instanceof ServerLevel sl) ? GSWirelessNetwork.get(sl).getPool(ownerUUID) : 0;
+        boolean powered = pool > 0;
         BlockState state = getBlockState();
         if (state.getValue(EnergyTransmitterBlock.POWERED) != powered) {
             level.setBlockAndUpdate(worldPosition, state.setValue(EnergyTransmitterBlock.POWERED, powered));
         }
     }
 
+    private void updatePublicState() {
+        if (level instanceof ServerLevel serverLevel && ownerUUID != null) {
+            GSWirelessNetwork.get(serverLevel).setPublic(ownerUUID, isPublic);
+        }
+    }
+
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyTransmitterBlockEntity be) {
-        if (!(level instanceof ServerLevel serverLevel)) return;
+        if (!(level instanceof ServerLevel serverLevel) || be.ownerUUID == null) return;
 
         GSWirelessNetwork network = GSWirelessNetwork.get(serverLevel);
-        boolean powered = network.getPool() > 0;
+        long pool = network.getPool(be.ownerUUID);
+        boolean powered = pool > 0;
 
         if (state.getValue(EnergyTransmitterBlock.POWERED) != powered) {
             level.setBlockAndUpdate(pos, state.setValue(EnergyTransmitterBlock.POWERED, powered));
@@ -131,11 +158,11 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
         if (!drainStack.isEmpty()) {
             IEnergyStorage itemEnergy = drainStack.getCapability(Capabilities.EnergyStorage.ITEM);
             if (itemEnergy != null && itemEnergy.canExtract()) {
-                long canReceive = GSWirelessNetwork.MAX_POOL - network.getPool();
+                long canReceive = GSWirelessNetwork.MAX_POOL - network.getPool(be.ownerUUID);
                 int toExtract = (int) Math.min(itemEnergy.getEnergyStored(), canReceive);
                 int extracted = itemEnergy.extractEnergy(toExtract, false);
                 if (extracted > 0) {
-                    network.addToPool(extracted);
+                    network.addToPool(be.ownerUUID, extracted);
                     be.setChanged();
                 }
             }
@@ -145,10 +172,10 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
         if (!chargeStack.isEmpty()) {
             IEnergyStorage itemEnergy = chargeStack.getCapability(Capabilities.EnergyStorage.ITEM);
             if (itemEnergy != null && itemEnergy.canReceive()) {
-                int toInsert = (int) Math.min(network.getPool(), itemEnergy.getMaxEnergyStored() - itemEnergy.getEnergyStored());
+                int toInsert = (int) Math.min(network.getPool(be.ownerUUID), itemEnergy.getMaxEnergyStored() - itemEnergy.getEnergyStored());
                 int accepted = itemEnergy.receiveEnergy(toInsert, false);
                 if (accepted > 0) {
-                    network.removeFromPool(accepted);
+                    network.removeFromPool(be.ownerUUID, accepted);
                     be.setChanged();
                 }
             }
@@ -158,12 +185,16 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+        if (ownerUUID != null) tag.putUUID(TAG_OWNER, ownerUUID);
+        tag.putBoolean(TAG_PUBLIC, isPublic);
         tag.put(TAG_INVENTORY, inventory.createTag(registries));
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        if (tag.hasUUID(TAG_OWNER)) ownerUUID = tag.getUUID(TAG_OWNER);
+        isPublic = tag.getBoolean(TAG_PUBLIC);
         inventory.fromTag(tag.getList(TAG_INVENTORY, Tag.TAG_COMPOUND), registries);
     }
 

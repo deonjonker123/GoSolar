@@ -8,6 +8,7 @@ import com.misterd.gosolar.gui.custom.BatteryBlockScreen;
 import com.misterd.gosolar.gui.custom.EnergyTransmitterScreen;
 import com.misterd.gosolar.item.GSCreativeTab;
 import com.misterd.gosolar.item.GSItems;
+import com.misterd.gosolar.network.GSNetwork;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -35,6 +36,7 @@ public class GoSolar {
         GSBlockEntities.register(modEventBus);
         GSDataComponents.register(modEventBus);
         GSMenuTypes.register(modEventBus);
+        GSNetwork.register(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

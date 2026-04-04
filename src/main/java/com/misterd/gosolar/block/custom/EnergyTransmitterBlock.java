@@ -4,10 +4,12 @@ import com.misterd.gosolar.blockentity.GSBlockEntities;
 import com.misterd.gosolar.blockentity.custom.EnergyTransmitterBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -83,6 +85,14 @@ public class EnergyTransmitterBlock extends BaseEntityBlock {
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (placer instanceof ServerPlayer player && level.getBlockEntity(pos) instanceof EnergyTransmitterBlockEntity be) {
+            be.setOwner(player.getUUID());
+        }
     }
 
     @Nullable

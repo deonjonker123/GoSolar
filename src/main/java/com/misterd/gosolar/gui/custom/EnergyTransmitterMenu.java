@@ -33,7 +33,7 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
     private static final int TOTAL_SLOT_COUNT = VANILLA_SLOT_COUNT + BLOCK_SLOT_COUNT;
 
     public EnergyTransmitterMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
     }
 
     public EnergyTransmitterMenu(int containerId, Inventory inv, BlockEntity blockEntity, ContainerData containerData) {
@@ -56,6 +56,14 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
 
     public long getMaxPool() {
         return ((long) containerData.get(2) << 32) | (containerData.get(3) & 0xFFFFFFFFL);
+    }
+
+    public boolean isPublic() {
+        return containerData.get(4) == 1;
+    }
+
+    public void setPublic(boolean pub) {
+        containerData.set(4, pub ? 1 : 0);
     }
 
     @Override

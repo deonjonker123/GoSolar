@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -18,6 +19,14 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
 
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath("gosolar", "textures/gui/transmitter_gui.png");
+
+    private static final int TOGGLE_PRIVATE_X = 151;
+    private static final int TOGGLE_PUBLIC_X  = 159;
+    private static final int TOGGLE_Y         = 49;
+    private static final int TOGGLE_W         = 6;
+    private static final int TOGGLE_H         = 9;
+    private static final int TOGGLE_U         = 135;
+    private static final int TOGGLE_V         = 177;
 
     public EnergyTransmitterScreen(EnergyTransmitterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -52,6 +61,10 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
                 guiGraphics.blit(GUI_TEXTURE, x + 6, y + 30, 0, 177, fillWidth, 47);
             }
         }
+
+        boolean isPublic = this.menu.isPublic();
+        int toggleX = x + (isPublic ? TOGGLE_PUBLIC_X : TOGGLE_PRIVATE_X);
+        guiGraphics.blit(GUI_TEXTURE, toggleX, y + TOGGLE_Y, TOGGLE_U, TOGGLE_V, TOGGLE_W, TOGGLE_H);
     }
 
     @Override
@@ -80,6 +93,30 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+
+        int toggleLeft = x + TOGGLE_PRIVATE_X;
+        int toggleRight = x + TOGGLE_PUBLIC_X + TOGGLE_W;
+        int toggleTop = y + TOGGLE_Y;
+        int toggleBottom = y + TOGGLE_Y + TOGGLE_H;
+
+        if (mouseX >= toggleLeft && mouseX <= toggleRight && mouseY >= toggleTop && mouseY <= toggleBottom) {
+            boolean newState = !this.menu.isPublic();
+            this.menu.setPublic(newState);
+            PacketDistributor.sendToServer(
+                    new com.misterd.gosolar.network.TransmitterTogglePacket(
+                            this.menu.blockEntity.getBlockPos(), newState
+                    )
+            );
+            return true;
+        }
+
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
     protected void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderTooltip(guiGraphics, mouseX, mouseY);
 
@@ -96,6 +133,23 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             tooltip.add(Component.translatable("gui.gosolar.transmitter_pool_title").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(fmt.format(poolStored) + " / " + fmt.format(maxPool) + " RF").withStyle(ChatFormatting.WHITE));
             tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(ChatFormatting.GRAY));
+            guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
+        }
+
+        int toggleLeft = x + TOGGLE_PRIVATE_X;
+        int toggleRight = x + TOGGLE_PUBLIC_X + TOGGLE_W;
+        int toggleTop = y + TOGGLE_Y;
+        int toggleBottom = y + TOGGLE_Y + TOGGLE_H;
+
+        if (mouseX >= toggleLeft && mouseX <= toggleRight && mouseY >= toggleTop && mouseY <= toggleBottom) {
+            List<Component> tooltip = new ArrayList<>();
+            if (this.menu.isPublic()) {
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_public").withStyle(ChatFormatting.GREEN));
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_public_desc").withStyle(ChatFormatting.GRAY));
+            } else {
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_private").withStyle(ChatFormatting.RED));
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_private_desc").withStyle(ChatFormatting.GRAY));
+            }
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
     }

@@ -49,5 +49,9 @@
   "block.gosolar.energy_transmitter.subtitle": "Network pool capacity: 2,147,483,647 RF",
 
   "gui.gosolar.battery_title": "Stored Energy",
-  "gui.gosolar.transmitter_pool_title": "Global Network Pool"
+  "gui.gosolar.transmitter_pool_title": "Global Network Pool",
+  "gui.gosolar.transmitter_toggle_public": "Public",
+  "gui.gosolar.transmitter_toggle_public_desc": "All players can draw from this pool",
+  "gui.gosolar.transmitter_toggle_private": "Private",
+  "gui.gosolar.transmitter_toggle_private_desc": "Only your receivers can draw from this pool"
 }

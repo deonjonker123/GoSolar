@@ -16,6 +16,7 @@ import snownee.jade.api.config.IPluginConfig;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.UUID;
 
 public enum EnergyTransmitterProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;
@@ -27,6 +28,7 @@ public enum EnergyTransmitterProvider implements IBlockComponentProvider, IServe
         CompoundTag data = accessor.getServerData();
         long poolStored = data.getLong("poolStored");
         long maxPool = data.getLong("maxPool");
+        boolean isPublic = data.getBoolean("isPublic");
 
         NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
         double pct = maxPool > 0 ? (double) poolStored * 100.0D / (double) maxPool : 0.0D;
@@ -35,15 +37,21 @@ public enum EnergyTransmitterProvider implements IBlockComponentProvider, IServe
                 .withStyle(ChatFormatting.YELLOW));
         tooltip.add(Component.literal(String.format("%.1f%%", pct))
                 .withStyle(ChatFormatting.GRAY));
+        tooltip.add(isPublic
+                ? Component.translatable("gui.gosolar.transmitter_toggle_public").withStyle(ChatFormatting.GREEN)
+                : Component.translatable("gui.gosolar.transmitter_toggle_private").withStyle(ChatFormatting.RED));
     }
 
     @Override
     public void appendServerData(CompoundTag data, BlockAccessor accessor) {
         BlockEntity be = accessor.getBlockEntity();
-        if (be instanceof EnergyTransmitterBlockEntity && accessor.getLevel() instanceof ServerLevel serverLevel) {
+        if (be instanceof EnergyTransmitterBlockEntity transmitter && accessor.getLevel() instanceof ServerLevel serverLevel) {
+            UUID ownerUUID = transmitter.getOwnerUUID();
             GSWirelessNetwork network = GSWirelessNetwork.get(serverLevel);
-            data.putLong("poolStored", network.getPool());
+            long poolStored = ownerUUID != null ? network.getPool(ownerUUID) : 0L;
+            data.putLong("poolStored", poolStored);
             data.putLong("maxPool", GSWirelessNetwork.MAX_POOL);
+            data.putBoolean("isPublic", transmitter.isPublic());
         }
     }
 
