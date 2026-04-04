@@ -22,7 +22,7 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
     public BatteryBlockScreen(BatteryBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.imageWidth = 176;
-        this.imageHeight = 162;
+        this.imageHeight = 167;
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
@@ -30,7 +30,6 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
     protected void init() {
         super.init();
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
-        this.titleLabelY = 4;
     }
 
     @Override
@@ -48,9 +47,9 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
         long maxEnergy = this.menu.getMaxEnergyStored();
 
         if (maxEnergy > 0 && energyStored > 0) {
-            int fillWidth = (int) (160.0D * (double) energyStored / (double) maxEnergy);
+            int fillWidth = (int) (135.0D * (double) energyStored / (double) maxEnergy);
             if (fillWidth > 0) {
-                guiGraphics.blit(GUI_TEXTURE, x + 8, y + 15, 0, 162, fillWidth, 34);
+                guiGraphics.blit(GUI_TEXTURE, x + 8, y + 20, 0, 167, fillWidth, 47);
             }
         }
     }
@@ -62,17 +61,16 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
 
         long energyStored = this.menu.getEnergyStored();
         long maxEnergy = this.menu.getMaxEnergyStored();
-        NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
 
-        Component rfText = Component.literal(fmt.format(energyStored) + " / " + fmt.format(maxEnergy) + " RF");
+        Component rfText = Component.literal(formatRF(energyStored) + " / " + formatRF(maxEnergy) + " RF");
         int rfTextWidth = this.font.width(rfText);
-        guiGraphics.drawString(this.font, rfText, 88 - rfTextWidth / 2, 24, 0xFFFFFF, true);
+        guiGraphics.drawString(this.font, rfText, 75 - rfTextWidth / 2, 31, 0xFFFFFF, true);
 
         if (maxEnergy > 0) {
             double pct = (double) energyStored * 100.0D / (double) maxEnergy;
             Component pctText = Component.literal(String.format("%.1f%%", pct));
             int pctWidth = this.font.width(pctText);
-            guiGraphics.drawString(this.font, pctText, 88 - pctWidth / 2, 34, 0xAAAAAA, true);
+            guiGraphics.drawString(this.font, pctText, 75 - pctWidth / 2, 43, 0xAAAAAA, true);
         }
     }
 
@@ -93,7 +91,7 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
         long energyStored = this.menu.getEnergyStored();
         long maxEnergy = this.menu.getMaxEnergyStored();
 
-        if (mouseX >= x + 7 && mouseX <= x + 169 && mouseY >= y + 14 && mouseY <= y + 50) {
+        if (mouseX >= x + 8 && mouseX <= x + 143 && mouseY >= y + 20 && mouseY <= y + 67) {
             List<Component> tooltip = new ArrayList<>();
             double pct = maxEnergy > 0 ? (double) energyStored * 100.0D / (double) maxEnergy : 0.0D;
             tooltip.add(Component.translatable("gui.gosolar.battery_title").withStyle(ChatFormatting.GOLD));
@@ -101,5 +99,12 @@ public class BatteryBlockScreen extends AbstractContainerScreen<BatteryBlockMenu
             tooltip.add(Component.literal(String.format("%.1f%%", pct)).withStyle(ChatFormatting.GRAY));
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
+    }
+
+    private static String formatRF(long value) {
+        if (value >= 1_000_000_000L) return String.format("%.1fB", value / 1_000_000_000.0D);
+        if (value >= 1_000_000L)     return String.format("%.1fM", value / 1_000_000.0D);
+        if (value >= 1_000L)         return String.format("%.1fK", value / 1_000.0D);
+        return String.valueOf(value);
     }
 }

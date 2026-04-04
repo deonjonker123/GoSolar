@@ -46,8 +46,8 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
         this.addPlayerInventory(inv);
         this.addPlayerHotbar(inv);
 
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 156, 22));
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 156, 47));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 150, 30));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 150, 61));
     }
 
     public long getPoolStored() {
@@ -94,14 +94,14 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < PLAYER_INVENTORY_ROW_COUNT; i++) {
             for (int j = 0; j < PLAYER_INVENTORY_COLUMN_COUNT; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 79 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 6 + j * 18, 94 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < HOTBAR_SLOT_COUNT; i++) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 138));
+            this.addSlot(new Slot(playerInventory, i, 6 + i * 18, 153));
         }
     }
 }

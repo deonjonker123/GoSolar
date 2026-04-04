@@ -46,9 +46,9 @@ public class BatteryBlockMenu extends AbstractContainerMenu {
         this.addPlayerInventory(inv);
         this.addPlayerHotbar(inv);
 
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 152, 56));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 152, 20));
 
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 116, 56));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 152, 51));
     }
 
     public long getEnergyStored() {
@@ -95,14 +95,14 @@ public class BatteryBlockMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < PLAYER_INVENTORY_ROW_COUNT; i++) {
             for (int j = 0; j < PLAYER_INVENTORY_COLUMN_COUNT; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 79 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < HOTBAR_SLOT_COUNT; i++) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 138));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 143));
         }
     }
 }

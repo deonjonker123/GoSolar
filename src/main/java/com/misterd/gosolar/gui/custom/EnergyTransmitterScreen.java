@@ -21,8 +21,8 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
 
     public EnergyTransmitterScreen(EnergyTransmitterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageWidth = 176;
-        this.imageHeight = 162;
+        this.imageWidth = 172;
+        this.imageHeight = 177;
         this.inventoryLabelY = Integer.MAX_VALUE;
     }
 
@@ -47,9 +47,9 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         long maxPool = this.menu.getMaxPool();
 
         if (maxPool > 0 && poolStored > 0) {
-            int fillWidth = (int) (139.0D * (double) poolStored / (double) maxPool);
+            int fillWidth = (int) (135.0D * (double) poolStored / (double) maxPool);
             if (fillWidth > 0) {
-                guiGraphics.blit(GUI_TEXTURE, x + 6, y + 24, 0, 162, fillWidth, 37);
+                guiGraphics.blit(GUI_TEXTURE, x + 6, y + 30, 0, 177, fillWidth, 47);
             }
         }
     }
@@ -63,13 +63,13 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
 
         Component rfText = Component.literal(formatRF(poolStored) + " / " + formatRF(maxPool) + " RF");
         int rfTextWidth = this.font.width(rfText);
-        guiGraphics.drawString(this.font, rfText, 75 - rfTextWidth / 2, 34, 0xFFFFFF, true);
+        guiGraphics.drawString(this.font, rfText, 73 - rfTextWidth / 2, 42, 0xFFFFFF, true);
 
         if (maxPool > 0) {
             double pct = (double) poolStored * 100.0D / (double) maxPool;
             Component pctText = Component.literal(String.format("%.1f%%", pct));
             int pctWidth = this.font.width(pctText);
-            guiGraphics.drawString(this.font, pctText, 75 - pctWidth / 2, 44, 0xAAAAAA, true);
+            guiGraphics.drawString(this.font, pctText, 73 - pctWidth / 2, 54, 0xAAAAAA, true);
         }
     }
 
@@ -90,7 +90,7 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         long poolStored = this.menu.getPoolStored();
         long maxPool = this.menu.getMaxPool();
 
-        if (mouseX >= x + 6 && mouseX <= x + 145 && mouseY >= y + 24 && mouseY <= y + 61) {
+        if (mouseX >= x + 6 && mouseX <= x + 141 && mouseY >= y + 30 && mouseY <= y + 77) {
             List<Component> tooltip = new ArrayList<>();
             double pct = maxPool > 0 ? (double) poolStored * 100.0D / (double) maxPool : 0.0D;
             tooltip.add(Component.translatable("gui.gosolar.transmitter_pool_title").withStyle(ChatFormatting.GOLD));
