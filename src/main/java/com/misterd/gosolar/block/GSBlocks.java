@@ -201,7 +201,7 @@ public class GSBlocks {
                     .requiresCorrectToolForDrops()){
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("block.gosolar.elite_energy_reveiver.subtitle").withStyle(ChatFormatting.GOLD));
+                    tooltipComponents.add(Component.translatable("block.gosolar.elite_energy_receiver.subtitle").withStyle(ChatFormatting.GOLD));
                 }
             });
 
