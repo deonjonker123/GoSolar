@@ -53,5 +53,8 @@
   "gui.gosolar.transmitter_toggle_public": "Public",
   "gui.gosolar.transmitter_toggle_public_desc": "All players can draw from this pool",
   "gui.gosolar.transmitter_toggle_private": "Private",
-  "gui.gosolar.transmitter_toggle_private_desc": "Only your receivers can draw from this pool"
+  "gui.gosolar.transmitter_toggle_private_desc": "Only your receivers can draw from this pool",
+  "gui.gosolar.transmitter_charge_inventory_on": "Charging items in your hotbar, offhand and curios.",
+  "gui.gosolar.transmitter_charge_inventory_on_desc": "Click to Disable",
+  "gui.gosolar.transmitter_charge_inventory_off": "Enable Wireless Charging"
 }

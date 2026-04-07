@@ -33,7 +33,7 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
     private static final int TOTAL_SLOT_COUNT = VANILLA_SLOT_COUNT + BLOCK_SLOT_COUNT;
 
     public EnergyTransmitterMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
     }
 
     public EnergyTransmitterMenu(int containerId, Inventory inv, BlockEntity blockEntity, ContainerData containerData) {
@@ -46,8 +46,8 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
         this.addPlayerInventory(inv);
         this.addPlayerHotbar(inv);
 
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 150, 30));
-        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 150, 61));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 1, 152, 20));
+        this.addSlot(new Slot(this.blockEntity.getInventory(), 0, 152, 51));
     }
 
     public long getPoolStored() {
@@ -64,6 +64,14 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
 
     public void setPublic(boolean pub) {
         containerData.set(4, pub ? 1 : 0);
+    }
+
+    public boolean isChargeInventory() {
+        return containerData.get(5) == 1;
+    }
+
+    public void setChargeInventory(boolean charge) {
+        containerData.set(5, charge ? 1 : 0);
     }
 
     @Override
@@ -102,14 +110,14 @@ public class EnergyTransmitterMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < PLAYER_INVENTORY_ROW_COUNT; i++) {
             for (int j = 0; j < PLAYER_INVENTORY_COLUMN_COUNT; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 6 + j * 18, 94 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < HOTBAR_SLOT_COUNT; i++) {
-            this.addSlot(new Slot(playerInventory, i, 6 + i * 18, 153));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 143));
         }
     }
 }

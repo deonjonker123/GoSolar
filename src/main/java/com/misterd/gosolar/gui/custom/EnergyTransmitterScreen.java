@@ -20,19 +20,25 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath("gosolar", "textures/gui/transmitter_gui.png");
 
-    private static final int TOGGLE_PRIVATE_X = 151;
-    private static final int TOGGLE_PUBLIC_X  = 159;
-    private static final int TOGGLE_Y         = 49;
+    // Public/private toggle
+    private static final int TOGGLE_PRIVATE_X = 153;
+    private static final int TOGGLE_PUBLIC_X  = 161;
+    private static final int TOGGLE_Y         = 71;
     private static final int TOGGLE_W         = 6;
     private static final int TOGGLE_H         = 9;
     private static final int TOGGLE_U         = 135;
-    private static final int TOGGLE_V         = 177;
+    private static final int TOGGLE_V         = 167;
+
+    // Charge inventory toggle (same sprite, different position)
+    private static final int CHARGE_PRIVATE_X = 117;
+    private static final int CHARGE_PUBLIC_X  = 125;
+    private static final int CHARGE_Y         = 71;
 
     public EnergyTransmitterScreen(EnergyTransmitterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageWidth = 172;
-        this.imageHeight = 177;
-        this.inventoryLabelY = Integer.MAX_VALUE;
+        this.imageWidth = 176;
+        this.imageHeight = 167;
+        this.inventoryLabelY = this.imageHeight - 96;
     }
 
     @Override
@@ -58,13 +64,19 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         if (maxPool > 0 && poolStored > 0) {
             int fillWidth = (int) (135.0D * (double) poolStored / (double) maxPool);
             if (fillWidth > 0) {
-                guiGraphics.blit(GUI_TEXTURE, x + 6, y + 30, 0, 177, fillWidth, 47);
+                guiGraphics.blit(GUI_TEXTURE, x + 8, y + 20, 0, 167, fillWidth, 47);
             }
         }
 
+        // Public/private toggle
         boolean isPublic = this.menu.isPublic();
         int toggleX = x + (isPublic ? TOGGLE_PUBLIC_X : TOGGLE_PRIVATE_X);
         guiGraphics.blit(GUI_TEXTURE, toggleX, y + TOGGLE_Y, TOGGLE_U, TOGGLE_V, TOGGLE_W, TOGGLE_H);
+
+        // Charge inventory toggle
+        boolean chargeInventory = this.menu.isChargeInventory();
+        int chargeToggleX = x + (chargeInventory ? CHARGE_PUBLIC_X : CHARGE_PRIVATE_X);
+        guiGraphics.blit(GUI_TEXTURE, chargeToggleX, y + CHARGE_Y, TOGGLE_U, TOGGLE_V, TOGGLE_W, TOGGLE_H);
     }
 
     @Override
@@ -76,13 +88,13 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
 
         Component rfText = Component.literal(formatRF(poolStored) + " / " + formatRF(maxPool) + " RF");
         int rfTextWidth = this.font.width(rfText);
-        guiGraphics.drawString(this.font, rfText, 73 - rfTextWidth / 2, 42, 0xFFFFFF, true);
+        guiGraphics.drawString(this.font, rfText, 73 - rfTextWidth / 2, 32, 0xFFFFFF, true);
 
         if (maxPool > 0) {
             double pct = (double) poolStored * 100.0D / (double) maxPool;
             Component pctText = Component.literal(String.format("%.1f%%", pct));
             int pctWidth = this.font.width(pctText);
-            guiGraphics.drawString(this.font, pctText, 73 - pctWidth / 2, 54, 0xAAAAAA, true);
+            guiGraphics.drawString(this.font, pctText, 73 - pctWidth / 2, 44, 0xAAAAAA, true);
         }
     }
 
@@ -97,19 +109,33 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        int toggleLeft = x + TOGGLE_PRIVATE_X;
-        int toggleRight = x + TOGGLE_PUBLIC_X + TOGGLE_W;
-        int toggleTop = y + TOGGLE_Y;
+        // Public/private toggle
+        int toggleLeft   = x + TOGGLE_PRIVATE_X;
+        int toggleRight  = x + TOGGLE_PUBLIC_X + TOGGLE_W;
+        int toggleTop    = y + TOGGLE_Y;
         int toggleBottom = y + TOGGLE_Y + TOGGLE_H;
 
         if (mouseX >= toggleLeft && mouseX <= toggleRight && mouseY >= toggleTop && mouseY <= toggleBottom) {
-            boolean newState = !this.menu.isPublic();
-            this.menu.setPublic(newState);
-            PacketDistributor.sendToServer(
-                    new com.misterd.gosolar.network.TransmitterTogglePacket(
-                            this.menu.blockEntity.getBlockPos(), newState
-                    )
-            );
+            boolean newPublic = !this.menu.isPublic();
+            this.menu.setPublic(newPublic);
+            PacketDistributor.sendToServer(new com.misterd.gosolar.network.TransmitterTogglePacket(
+                    this.menu.blockEntity.getBlockPos(), newPublic, this.menu.isChargeInventory()
+            ));
+            return true;
+        }
+
+        // Charge inventory toggle
+        int chargeLeft   = x + CHARGE_PRIVATE_X;
+        int chargeRight  = x + CHARGE_PUBLIC_X + TOGGLE_W;
+        int chargeTop    = y + CHARGE_Y;
+        int chargeBottom = y + CHARGE_Y + TOGGLE_H;
+
+        if (mouseX >= chargeLeft && mouseX <= chargeRight && mouseY >= chargeTop && mouseY <= chargeBottom) {
+            boolean newCharge = !this.menu.isChargeInventory();
+            this.menu.setChargeInventory(newCharge);
+            PacketDistributor.sendToServer(new com.misterd.gosolar.network.TransmitterTogglePacket(
+                    this.menu.blockEntity.getBlockPos(), this.menu.isPublic(), newCharge
+            ));
             return true;
         }
 
@@ -127,7 +153,7 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         long poolStored = this.menu.getPoolStored();
         long maxPool = this.menu.getMaxPool();
 
-        if (mouseX >= x + 6 && mouseX <= x + 141 && mouseY >= y + 30 && mouseY <= y + 77) {
+        if (mouseX >= x + 6 && mouseX <= x + 143 && mouseY >= y + 19 && mouseY <= y + 67) {
             List<Component> tooltip = new ArrayList<>();
             double pct = maxPool > 0 ? (double) poolStored * 100.0D / (double) maxPool : 0.0D;
             tooltip.add(Component.translatable("gui.gosolar.transmitter_pool_title").withStyle(ChatFormatting.GOLD));
@@ -136,9 +162,10 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
 
-        int toggleLeft = x + TOGGLE_PRIVATE_X;
-        int toggleRight = x + TOGGLE_PUBLIC_X + TOGGLE_W;
-        int toggleTop = y + TOGGLE_Y;
+        // Public/private toggle tooltip
+        int toggleLeft   = x + TOGGLE_PRIVATE_X;
+        int toggleRight  = x + TOGGLE_PUBLIC_X + TOGGLE_W;
+        int toggleTop    = y + TOGGLE_Y;
         int toggleBottom = y + TOGGLE_Y + TOGGLE_H;
 
         if (mouseX >= toggleLeft && mouseX <= toggleRight && mouseY >= toggleTop && mouseY <= toggleBottom) {
@@ -149,6 +176,23 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             } else {
                 tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_private").withStyle(ChatFormatting.RED));
                 tooltip.add(Component.translatable("gui.gosolar.transmitter_toggle_private_desc").withStyle(ChatFormatting.GRAY));
+            }
+            guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
+        }
+
+        // Charge inventory toggle tooltip
+        int chargeLeft   = x + CHARGE_PRIVATE_X;
+        int chargeRight  = x + CHARGE_PUBLIC_X + TOGGLE_W;
+        int chargeTop    = y + CHARGE_Y;
+        int chargeBottom = y + CHARGE_Y + TOGGLE_H;
+
+        if (mouseX >= chargeLeft && mouseX <= chargeRight && mouseY >= chargeTop && mouseY <= chargeBottom) {
+            List<Component> tooltip = new ArrayList<>();
+            if (this.menu.isChargeInventory()) {
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_charge_inventory_on").withStyle(ChatFormatting.GOLD));
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_charge_inventory_on_desc").withStyle(ChatFormatting.GRAY));
+            } else {
+                tooltip.add(Component.translatable("gui.gosolar.transmitter_charge_inventory_off").withStyle(ChatFormatting.GOLD));
             }
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }

@@ -12,15 +12,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record TransmitterTogglePacket(BlockPos pos, boolean isPublic) implements CustomPacketPayload {
+public record TransmitterTogglePacket(BlockPos pos, boolean isPublic, boolean chargeInventory) implements CustomPacketPayload {
 
     public static final Type<TransmitterTogglePacket> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath("gosolar", "transmitter_toggle")
     );
 
     public static final StreamCodec<FriendlyByteBuf, TransmitterTogglePacket> STREAM_CODEC = StreamCodec.composite(
-            BlockPos.STREAM_CODEC, TransmitterTogglePacket::pos,
-            ByteBufCodecs.BOOL, TransmitterTogglePacket::isPublic,
+            BlockPos.STREAM_CODEC,    TransmitterTogglePacket::pos,
+            ByteBufCodecs.BOOL,       TransmitterTogglePacket::isPublic,
+            ByteBufCodecs.BOOL,       TransmitterTogglePacket::chargeInventory,
             TransmitterTogglePacket::new
     );
 
@@ -40,6 +41,7 @@ public record TransmitterTogglePacket(BlockPos pos, boolean isPublic) implements
             if (!serverPlayer.getUUID().equals(transmitter.getOwnerUUID())) return;
 
             transmitter.setPublic(packet.isPublic());
+            transmitter.setChargeInventory(packet.chargeInventory());
         });
     }
 }
