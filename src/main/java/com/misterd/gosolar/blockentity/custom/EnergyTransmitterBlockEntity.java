@@ -169,7 +169,6 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
             level.setBlockAndUpdate(pos, state.setValue(EnergyTransmitterBlock.POWERED, powered));
         }
 
-        // --- Drain slot (item → pool) ---
         ItemStack drainStack = be.inventory.getItem(SLOT_DRAIN);
         if (!drainStack.isEmpty()) {
             IEnergyStorage itemEnergy = drainStack.getCapability(Capabilities.EnergyStorage.ITEM);
@@ -184,7 +183,6 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
             }
         }
 
-        // --- Charge slot (pool → item), always takes priority ---
         ItemStack chargeStack = be.inventory.getItem(SLOT_CHARGE);
         if (!chargeStack.isEmpty()) {
             IEnergyStorage itemEnergy = chargeStack.getCapability(Capabilities.EnergyStorage.ITEM);
@@ -199,21 +197,17 @@ public class EnergyTransmitterBlockEntity extends BlockEntity implements MenuPro
             }
         }
 
-        // --- Inventory charging (pool → hotbar + offhand + curios) ---
         if (be.chargeInventory) {
             Player owner = serverLevel.getPlayerByUUID(be.ownerUUID);
             if (owner != null) {
                 List<ItemStack> targets = new ArrayList<>();
 
-                // Hotbar slots 0-8
                 for (int i = 0; i < 9; i++) {
                     targets.add(owner.getInventory().items.get(i));
                 }
 
-                // Offhand
                 targets.addAll(owner.getInventory().offhand);
 
-                // Curios (optional dependency)
                 if (ModList.get().isLoaded("curios")) {
                     CuriosApi.getCuriosInventory(owner).ifPresent(curios ->
                             curios.getCurios().values().forEach(handler -> {

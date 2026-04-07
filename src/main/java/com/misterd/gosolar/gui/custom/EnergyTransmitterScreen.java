@@ -1,5 +1,6 @@
 package com.misterd.gosolar.gui.custom;
 
+import com.misterd.gosolar.network.TransmitterTogglePacket;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,7 +21,6 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath("gosolar", "textures/gui/transmitter_gui.png");
 
-    // Public/private toggle
     private static final int TOGGLE_PRIVATE_X = 153;
     private static final int TOGGLE_PUBLIC_X  = 161;
     private static final int TOGGLE_Y         = 71;
@@ -29,7 +29,6 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
     private static final int TOGGLE_U         = 135;
     private static final int TOGGLE_V         = 167;
 
-    // Charge inventory toggle (same sprite, different position)
     private static final int CHARGE_PRIVATE_X = 117;
     private static final int CHARGE_PUBLIC_X  = 125;
     private static final int CHARGE_Y         = 71;
@@ -68,12 +67,10 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             }
         }
 
-        // Public/private toggle
         boolean isPublic = this.menu.isPublic();
         int toggleX = x + (isPublic ? TOGGLE_PUBLIC_X : TOGGLE_PRIVATE_X);
         guiGraphics.blit(GUI_TEXTURE, toggleX, y + TOGGLE_Y, TOGGLE_U, TOGGLE_V, TOGGLE_W, TOGGLE_H);
 
-        // Charge inventory toggle
         boolean chargeInventory = this.menu.isChargeInventory();
         int chargeToggleX = x + (chargeInventory ? CHARGE_PUBLIC_X : CHARGE_PRIVATE_X);
         guiGraphics.blit(GUI_TEXTURE, chargeToggleX, y + CHARGE_Y, TOGGLE_U, TOGGLE_V, TOGGLE_W, TOGGLE_H);
@@ -109,7 +106,6 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        // Public/private toggle
         int toggleLeft   = x + TOGGLE_PRIVATE_X;
         int toggleRight  = x + TOGGLE_PUBLIC_X + TOGGLE_W;
         int toggleTop    = y + TOGGLE_Y;
@@ -118,13 +114,12 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         if (mouseX >= toggleLeft && mouseX <= toggleRight && mouseY >= toggleTop && mouseY <= toggleBottom) {
             boolean newPublic = !this.menu.isPublic();
             this.menu.setPublic(newPublic);
-            PacketDistributor.sendToServer(new com.misterd.gosolar.network.TransmitterTogglePacket(
+            PacketDistributor.sendToServer(new TransmitterTogglePacket(
                     this.menu.blockEntity.getBlockPos(), newPublic, this.menu.isChargeInventory()
             ));
             return true;
         }
 
-        // Charge inventory toggle
         int chargeLeft   = x + CHARGE_PRIVATE_X;
         int chargeRight  = x + CHARGE_PUBLIC_X + TOGGLE_W;
         int chargeTop    = y + CHARGE_Y;
@@ -133,7 +128,7 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
         if (mouseX >= chargeLeft && mouseX <= chargeRight && mouseY >= chargeTop && mouseY <= chargeBottom) {
             boolean newCharge = !this.menu.isChargeInventory();
             this.menu.setChargeInventory(newCharge);
-            PacketDistributor.sendToServer(new com.misterd.gosolar.network.TransmitterTogglePacket(
+            PacketDistributor.sendToServer(new TransmitterTogglePacket(
                     this.menu.blockEntity.getBlockPos(), this.menu.isPublic(), newCharge
             ));
             return true;
@@ -162,7 +157,6 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
 
-        // Public/private toggle tooltip
         int toggleLeft   = x + TOGGLE_PRIVATE_X;
         int toggleRight  = x + TOGGLE_PUBLIC_X + TOGGLE_W;
         int toggleTop    = y + TOGGLE_Y;
@@ -180,7 +174,6 @@ public class EnergyTransmitterScreen extends AbstractContainerScreen<EnergyTrans
             guiGraphics.renderComponentTooltip(this.font, tooltip, mouseX, mouseY);
         }
 
-        // Charge inventory toggle tooltip
         int chargeLeft   = x + CHARGE_PRIVATE_X;
         int chargeRight  = x + CHARGE_PUBLIC_X + TOGGLE_W;
         int chargeTop    = y + CHARGE_Y;
